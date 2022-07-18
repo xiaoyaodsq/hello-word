@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="btnClick()">防抖</button>
+  <script>
+    const debounce = (func, wait=500) => {
+      // console.log(33333, func)
+      // 缓存一个定时器id
+      let timer = 0
+      // 这里返回的函数是用户每次实际调用的防抖函数
+      // 如果已经设定了定时器则清空定时器
+      // 开始一个新的定时器，延迟执行用户传入的方法
+      return function (...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          console.log(func.apply(this, args))
+          func.apply(this, args)
+        }, wait);
+      }
+    }
+    function clickValue() {
+      console.log(666)
+    }
+    function btnClick(){
+      debounce(clickValue)
+    }
+    // 节流
+    
+    
+  </script>
+</body>
+</html>
